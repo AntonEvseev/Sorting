@@ -23,7 +23,7 @@ namespace Sorting
                 System.Console.Write(x);
             }
             //сортировка
-            QuickSorting.sorting(arr, 0, arr.Length - 1);
+            Sorting(arr, 0, arr.Length - 1);
             System.Console.WriteLine("\nThe array after sorting:");
             foreach (double x in arr)
             {
@@ -32,28 +32,40 @@ namespace Sorting
             System.Console.WriteLine("\nPress the <Enter> key");
             System.Console.ReadLine();
         }
-        class QuickSorting
+        public static void Sorting(double[] arr, long element1, long element2)
         {
-            public static void sorting(double[] arr, long first, long last)
+            double p = arr[(element2 - element1) / 2 + element1];
+            double temp;
+            long i = element1;
+            long j = element2;
+            while (i <= j)
             {
-                double p = arr[(last - first) / 2 + first];
-                double temp;
-                long i = first, j = last;
-                while (i <= j)
+                while (arr[i] < p && i <= element2)
                 {
-                    while (arr[i] < p && i <= last) ++i;
-                    while (arr[j] > p && j >= first) --j;
-                    if (i <= j)
-                    {
-                        temp = arr[i];
-                        arr[i] = arr[j];
-                        arr[j] = temp;
-                        ++i; --j;
-                    }
+                    ++i;
                 }
-                if (j > first) sorting(arr, first, j);
-                if (i < last) sorting(arr, i, last);
+                while (arr[j] > p && j >= element1)
+                {
+                    --j;
+                }
+                if (i <= j)
+                {
+                    temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                    ++i;
+                    --j;
+                }
+             }
+            if (j > element1)
+                {
+                    Sorting(arr, element1, j);
+                }
+            if (i < element2)
+                {
+                    Sorting(arr, i, element2);
+                }
             }
         }
-    }
-}
+   }
+
